@@ -1,0 +1,133 @@
+<div class="card">
+    <p-table [columns]="cols" [value]="listEmployer"  [paginator]="true" [rows]="15">
+    <ng-template pTemplate="caption">
+        Lista de Empleados
+    </ng-template>
+    <ng-template pTemplate="header" let-columns>
+        <tr>
+            <th *ngFor="let col of columns" [pSortableColumn]="col.field">
+                {{col.header}}
+                <p-sortIcon [field]="col.field"></p-sortIcon>
+            </th>
+            <th style="width: 100px;"></th>
+        </tr>
+    </ng-template>
+    
+    <ng-template pTemplate="body" let-rowData let-columns="columns">
+
+        <tr [pSelectableRow]="rowData">
+            <td *ngFor="let col of columns">
+                {{rowData[col.field]}}
+            </td>
+            <td>
+                <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2" (click)="onRowSelect(rowData)"></button>
+                <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="delete(rowData)"></button>
+            
+            </td>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="summary" let-rowData>
+        <div style="text-align:left">
+            <button type="button" pButton icon="pi pi-plus" (click)="showDialogToAdd()" label="Add"></button>
+        </div>
+    </ng-template>
+</p-table>
+</div>
+
+
+<p-dialog header="Datos Usuario" [(visible)]="displayDialog" [focusOnShow]="false" 
+            [responsive]="true" showEffect="fade" [modal]="true" [style]="{width: '300px'}">
+    <div class="p-grid ui-fluid" *ngIf="employer">
+       
+       <!-- 
+        <div class="p-col-4">
+            <label for="vin">Cédula: </label>
+        </div>
+        <div class="p-col-8">
+            <input type="number"  inputId="cedula" [(ngModel)]="employer.cedula"  class="ng-invalid ng-dirty"  />
+            <small *ngIf="(employer.cedula == null) && statusSave == true " id="cedula-help" class="p-error block">Cédula es requerida.</small>
+
+        </div>
+        <div class="p-col-4">
+            <label for="year">Nombres: </label>
+        </div>
+
+        <div class="p-col-8">
+            <input pInputText id="nombres" [(ngModel)]="employer.nombres " class="ng-invalid ng-dirty" />
+            <small *ngIf="(employer.nombres == null || employer.nombres.trim() == '') && statusSave == true " id="nombre-help" class="p-error block">El nombre es requerida.</small>
+
+        </div>
+        <div class="p-col-4">
+            <label for="brand">Apellidos: </label>
+        </div>
+        <div class="p-col-8">
+            <input pInputText id="apellidos" [(ngModel)]="employer.apellidos"  class="ng-invalid ng-dirty" />
+            <small *ngIf="(employer.apellidos== null || employer.apellidos.trim() == '') && statusSave == true " id="apellido-help" class="p-error block">El apellido es requerida.</small>
+
+        </div>
+
+        <div class="p-col-4">
+            <label for="brand">Correo Electrónico: </label>
+        </div>
+        <div class="p-col-8">
+            <input pInputText id="correoElectronico" [(ngModel)]="employer.correoElectronico" class="ng-invalid ng-dirty" />
+            <small *ngIf="(employer.correoElectronico== null || employer.correoElectronico.trim() == '') && statusSave == true " id="correoElectronico-help" class="p-error block">El Correo electrónico es requerida.</small>
+
+        </div>
+ -->
+        <div class="p-col-4">
+            <label for="brand">Fecha de Nacimiento: </label>
+        </div>
+        <div class="p-col-8">
+            <input pInputText id="Fecha" [(ngModel)]="employer.fechanacimiento" class="ng-invalid ng-dirty" />
+            <small *ngIf="(employer.fechanacimiento== null || employer.fechanacimiento.trim() == '') && statusSave == true " id="fechanacimiento-help" class="p-error block">La fecha nacimiento es requerida.</small>
+
+        </div>
+
+
+
+        <div class="p-col-4">
+            <label for="brand">Domicilio: </label>
+        </div>
+        <div class="p-col-8">
+            <input pInputText id="Domicilio" [(ngModel)]="employer.domicilio" class="ng-invalid ng-dirty" />
+            <small *ngIf="(employer.domicilio== null || employer.domicilio.trim() == '') && statusSave == true " id="domicilio-help" class="p-error block">El domicilio es requerido.</small>
+
+        </div>
+
+        <div class="p-col-4">
+            <label for="brand">Celular: </label>
+        </div>
+        <div class="p-col-8">
+            <input pInputText id="celular" [(ngModel)]="employer.celular" class="ng-invalid ng-dirty" />
+            <small *ngIf="(employer.celular== null || employer.celular.trim() == '') && statusSave == true " id="domicilio-help" class="p-error block">El celular es requerido.</small>
+
+        </div>
+
+
+        <div class="p-col-4">
+            <label for="brand">Vacuna: </label>
+        </div>
+        <div class="p-col-8">
+            <input type="number"  inputId="estadovacuna" [(ngModel)]="employer.estadovacuna"  class="ng-invalid ng-dirty" min="0" max="3" />
+
+        </div>
+
+
+
+
+
+
+
+
+        
+    </div>
+    <p-footer>
+        <div class="ui-dialog-buttonpane ui-helper-clearfix">
+            
+            <button type="button" pButton icon="pi pi-check" (click)="save()" label="Save"></button>
+        </div>
+    </p-footer>
+
+
+</p-dialog>
