@@ -1,7 +1,7 @@
 # Proyecto-Vacunas
 Inventario de vacunación de empleados 
 
-# hulkstore_backend
+# Vacunas backend
 Backend desarrollado con Java + SpringBoot
 
 Proyecto realizado en IntellIJ
